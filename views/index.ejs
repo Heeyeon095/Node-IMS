@@ -1,47 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
+    <meta charset="UTF-8" />
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/Heart.ico" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascripts/login.js" defer></script>
   </head>
-  <body>
-    
-
+  <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
     <div class="wrap">
-
-    <p class="title">
-    <span>IMS</span>
-    재고관리 시스템
-    </p>
+      <p class="title">
+        <span>IMS</span>
+        재고관리 시스템
+      </p>
 
       <div class="tab-wrap">
-
         <div class="tab">
-
-          <div class="login-tab">Login</div>
+          <div class="login-tab on">Login</div>
 
           <div class="join-tab">Join</div>
-
         </div>
 
         <div class="form">
+          <form method="post" action="/loginProcess" class="login-form form-box on">
+            <div>
+              <label for="login-id">User id</label>
+              <input type="text" name="login_id" id="login-id" />
+            </div>
 
-          <form action="" class="login-form">
+            <div>
+              <label for="login-ps">Password</label>
+              <input type="password" name="login_ps" id="login-ps" />
+            </div>
 
-            <input type="text">
-            <button type="reset">reset</button>
-
+            <button type="submit" id="login-btn">Login</button>
           </form>
 
-          <form action="" class="join-form">
+          <form method="post" action="/join" class="join-form form-box">
+            <div>
+              <label for="join-id">User id</label>
+              <input type="text" name="join_id" id="join-id" />
+            </div>
 
-          </fomr>
-        
+            <div>
+              <label for="join-ps">Password</label>
+              <input type="password" name="join_ps" id="join-ps" />
+            </div>
+
+            <div>
+              <label for="join-birth">Birth</label>
+              <input type="date" name="join_birth" id="join-birth" />
+            </div>
+
+            <button type="submit" id="join-btn">Join</button>
+          </form>
         </div>
-
       </div>
-
     </div>
-
+    <script>
+      document.querySelector('form.login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+          url: '/loginProcess',
+          method: 'post',
+          async: false,
+          data: {
+            login_id: document.getElementById('login-id').value,
+            login_ps: document.getElementById('login-ps').value,
+          },
+          success: function (result) {
+            if (result.trim() == 'T') {
+              alert('Welcome !!!');
+              location.href = '/main';
+            } else {
+              alert(document.getElementById('login-id').value + ' user not found');
+            }
+          },
+        });
+      });
+    </script>
   </body>
 </html>

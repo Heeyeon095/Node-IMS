@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="shortcut icon" href="/images/Heart.ico">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' integrity='sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==' crossorigin='anonymous'/>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/history.css">
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+  integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+  crossorigin="anonymous"
+  ></script>
+  <script src="/javascript/history.js"></script>
+  </head>
+<body>
+  
+  <div class="wrap">
+
+    <div class="search-wrap">
+
+      <div>
+        <div class="search-tab">검색</div>
+        <form class="search-box">
+          <div>
+            <label for="search-code">상품코드</label>
+            <input type="text" id="search-code">
+          </div>
+          <div>
+            <label for="search-name">상품명</label>
+            <input type="text" id="search-name">
+          </div>
+          <button type="submit">
+            <img src="/images/search.png" alt="search icon">
+          </button>
+        </form>
+      </div>
+
+      <div class="btn-wrap">
+        <button class="save-btn"><img src="/images/save.png" alt="save"></button>
+        <button class="plus-btn"><img src="/images/plus.png" alt="plus"></button>
+        <button class="edit-btn"><img src="/images/edit.png" alt="edit"></button>
+        <button>Dashboard</button>
+      </div>
+
+    </div>
+
+    <div class="dashboard">
+
+      <div class="list-wrap">
+        <table class="list-table">
+          <tr class="list-title">
+            <th>상품코드</th>
+            <th>상품명</th>
+            <th>유통기한</th>
+            <th>상태</th>
+            <th>수량</th>
+            <th>등록일자</th>
+            <th>수정일자</th>
+          </tr>
+          <tr>
+            <td><input type="text" name=""></td>
+            <td><input type="text" name=""></td>
+            <td><input type="text" name=""></td>
+            <td><select name="OI" id="OI">
+              <option value="1">입고</option>
+              <option value="0">출고</option>
+            </select></td>
+            <td><input type="text" name=""></td>
+            <td><input type="text" name=""></td>
+            <td><input type="text" name=""></td>
+          </tr>
+          <tr>
+            <td>001</td>
+            <td>히연이</td>
+            <td>2099.01.01</td>
+            <td>입고</td>
+            <td>1마리</td>
+            <td>2023.01.01</td>
+            <td>2023.08.07</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="pagenation">
+        <a href="#"><i class="fa-solid fa-angles-left"></i></a>
+        <a href="#"><i class="fa-solid fa-angle-left"></i></a>
+        <span id="page">
+          <a href="#" class="page on">1</a>
+        </span>
+        <a href="#"><i class="fa-solid fa-angle-right"></i></a>
+        <a href="#"><i class="fa-solid fa-angles-right"></i></a>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

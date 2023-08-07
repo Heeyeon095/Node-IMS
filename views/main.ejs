@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="shortcut icon" href="/images/Heart.ico">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' integrity='sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==' crossorigin='anonymous'/>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+  integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+  crossorigin="anonymous"
+  ></script>
+  <script src="/javascript/main.js"></script>
+  </head>
+<body>
+  
+  <div class="wrap">
+
+    <div class="search-wrap">
+
+      <div>
+        <div class="search-tab">검색</div>
+        <form class="search-box">
+          <div>
+            <label for="search-code">상품코드</label>
+            <input type="text" id="search-code">
+          </div>
+          <div>
+            <label for="search-name">상품명</label>
+            <input type="text" id="search-name">
+          </div>
+          <button type="submit">
+            <img src="/images/search.png" alt="search icon">
+          </button>
+        </form>
+      </div>
+
+      <button>History</button>
+
+    </div>
+
+    <div class="dashboard">
+
+      <div class="list-wrap">
+        <table>
+          <tr>
+            <th>상품코드</th>
+            <th>상품명</th>
+            <th>유통기한</th>
+            <th>수량</th>
+          </tr>
+          <tr>
+            <td>001</td>
+            <td>히연이</td>
+            <td>2099.01.01</td>
+            <td>1마리</td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>원진이</td>
+            <td>2099.01.01</td>
+            <td>2마리</td>
+          </tr>
+        </table>
+        <div class="list-all">
+          <div class="all">총 건수</div>
+          <div class="all-count"><span class="count-1"></span> 건</div>
+          <div class="all">총 개수</div>
+          <div class="all-count"><span class="count-2"></span> 개</div>
+        </div>
+      </div>
+
+      <div class="pagenation">
+        <a href="#"><i class="fa-solid fa-angles-left"></i></a>
+        <a href="#"><i class="fa-solid fa-angle-left"></i></a>
+        <span id="page">
+          <a href="#" class="page on">1</a>
+        </span>
+        <a href="#"><i class="fa-solid fa-angle-right"></i></a>
+        <a href="#"><i class="fa-solid fa-angles-right"></i></a>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
