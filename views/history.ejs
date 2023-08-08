@@ -1,102 +1,122 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="shortcut icon" href="/images/Heart.ico">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' integrity='sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==' crossorigin='anonymous'/>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/history.css">
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-  integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-  crossorigin="anonymous"
-  ></script>
-  <script src="/javascript/history.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/images/Heart.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/history.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascripts/history.js" defer></script>
   </head>
-<body>
-  
-  <div class="wrap">
+  <body>
+    <div class="wrap">
+      <div class="search-wrap">
+        <div>
+          <div class="search-tab">검색</div>
+          <form class="search-box">
+            <div>
+              <label for="search-code">상품코드</label>
+              <input type="text" id="search-code" />
+            </div>
+            <div>
+              <label for="search-name">상품명</label>
+              <input type="text" id="search-name" />
+            </div>
+            <button type="submit">
+              <img src="/images/search.png" alt="search icon" />
+            </button>
+          </form>
+        </div>
 
-    <div class="search-wrap">
-
-      <div>
-        <div class="search-tab">검색</div>
-        <form class="search-box">
-          <div>
-            <label for="search-code">상품코드</label>
-            <input type="text" id="search-code">
-          </div>
-          <div>
-            <label for="search-name">상품명</label>
-            <input type="text" id="search-name">
-          </div>
-          <button type="submit">
-            <img src="/images/search.png" alt="search icon">
-          </button>
-        </form>
+        <div class="btn-wrap">
+          <button class="save save-btn" type="submit"><img src="/images/save.png" alt="save" /></button>
+          <button class="plus plus-btn"><img src="/images/plus.png" alt="plus" /></button>
+          <button class="delete delet-btn"><img src="/images/delete.png" alt="delete" /></button>
+          <button onclick="location.href='http://localhost:3000/main'">Dashboard</button>
+        </div>
       </div>
 
-      <div class="btn-wrap">
-        <button class="save-btn"><img src="/images/save.png" alt="save"></button>
-        <button class="plus-btn"><img src="/images/plus.png" alt="plus"></button>
-        <button class="edit-btn"><img src="/images/edit.png" alt="edit"></button>
-        <button>Dashboard</button>
-      </div>
+      <div class="dashboard">
+        <div class="list-wrap">
+          <ul class="list-title">
+            <li>상품코드</li>
+            <li>상품명</li>
+            <li>유통기한</li>
+            <li>상태</li>
+            <li>수량</li>
+            <li>등록일자</li>
+            <li>수정일자</li>
+          </ul>
+          <form action="/saveStock" method="post" name="heeForm">
+            <table class="list-table">
+              <% for (let i = 0; i < histories.length; i++){ %>
+              <tr data-history-id="<%= histories[i].history_id %>">
+                <td><%= histories[i].goods_code %></td>
+                <td><%= histories[i].goods_name %></td>
+                <td><%= histories[i].deal_period %></td>
+                <td><%= histories[i].state %></td>
+                <td><%= histories[i].count %></td>
+                <td><%= histories[i].reg_date %></td>
+                <td><%= histories[i].upd_date %></td>
+              </tr>
+              <% } %>
+            </table>
+          </form>
+        </div>
 
+        <div class="pagenation">
+          <a href="#"><i class="fa-solid fa-angles-left"></i></a>
+          <a href="#"><i class="fa-solid fa-angle-left"></i></a>
+          <span id="page">
+            <a href="#" class="page on">1</a>
+          </span>
+          <a href="#"><i class="fa-solid fa-angle-right"></i></a>
+          <a href="#"><i class="fa-solid fa-angles-right"></i></a>
+        </div>
+      </div>
     </div>
+    <script>
+      const Global_Goods = JSON.parse(`<%- JSON.stringify(goods) %>`);
+      document.querySelector('button.save').addEventListener('click', (e) => {
+        const form = document.querySelector('form[name=heeForm]');
+        const code = form.code.value;
+        // const name = form.name.value;
+        const exDate = form.ex_date.value;
+        const oi = form.oi.value;
+        const count = form.count.value;
 
-    <div class="dashboard">
+        if (!code) {
+          alert('code');
+          form.code.focus();
+          return;
+          // } else if (!name) {
+          //   alert('name');
+          //   form.name.focus();
+          //   return;
+        } else if (!exDate) {
+          alert('ex_date');
+          form.ex_date.focus();
+          return;
+        } else if (!count) {
+          alert('count');
+          form.count.focus();
+          return;
+        }
 
-      <div class="list-wrap">
-        <table class="list-table">
-          <tr class="list-title">
-            <th>상품코드</th>
-            <th>상품명</th>
-            <th>유통기한</th>
-            <th>상태</th>
-            <th>수량</th>
-            <th>등록일자</th>
-            <th>수정일자</th>
-          </tr>
-          <tr>
-            <td><input type="text" name=""></td>
-            <td><input type="text" name=""></td>
-            <td><input type="text" name=""></td>
-            <td><select name="OI" id="OI">
-              <option value="1">입고</option>
-              <option value="0">출고</option>
-            </select></td>
-            <td><input type="text" name=""></td>
-            <td><input type="text" name=""></td>
-            <td><input type="text" name=""></td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>히연이</td>
-            <td>2099.01.01</td>
-            <td>입고</td>
-            <td>1마리</td>
-            <td>2023.01.01</td>
-            <td>2023.08.07</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="pagenation">
-        <a href="#"><i class="fa-solid fa-angles-left"></i></a>
-        <a href="#"><i class="fa-solid fa-angle-left"></i></a>
-        <span id="page">
-          <a href="#" class="page on">1</a>
-        </span>
-        <a href="#"><i class="fa-solid fa-angle-right"></i></a>
-        <a href="#"><i class="fa-solid fa-angles-right"></i></a>
-      </div>
-
-    </div>
-
-  </div>
-
-</body>
+        form.submit();
+      });
+    </script>
+  </body>
 </html>

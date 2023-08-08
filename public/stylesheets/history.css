@@ -82,8 +82,14 @@
 
 .btn-wrap {
   display: flex;
+  justify-content: space-between;
   height: inherit;
   margin-top: 100px;
+  margin-right: -12px;
+}
+
+.plus-btn img {
+  margin-top: 5px;
 }
 
 .search-wrap > .btn-wrap > button {
@@ -118,12 +124,23 @@
   width: 100%;
 }
 
-.list-wrap table {
-  width: 100%;
-  height: 720px;
+.list-title {
+  background-color: #f3f1f5;
+  font-weight: bold;
 }
 
-.list-wrap table tr {
+.list-title li:last-child {
+  border-right: none;
+}
+
+.list-wrap table {
+  width: 100.2%;
+  height: 720px;
+  margin-left: -1.9px;
+  margin-top: -1px;
+}
+
+.list-wrap table tr, .list-title {
   width: 100%;
   display: flex;
   text-align: center;
@@ -131,10 +148,14 @@
   border-bottom: none;
 }
 
-.list-wrap table tr td, th {
+.list-wrap table tr td, th, .list-title > li {
   width: 25%;
   padding: 10px 0;
   border-right: 1px solid #bbb;
+}
+
+.list-wrap table tr.select {
+  background-color: #f1e7cb;
 }
 
 th {
@@ -143,6 +164,10 @@ th {
 
 th:last-child {
   border-right: none;
+}
+
+.list-wrap .list-table .new-tr td {
+  background-color: #e8f1fd;
 }
 
 .list-wrap table tr td:last-child {

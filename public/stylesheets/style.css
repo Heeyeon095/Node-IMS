@@ -34,6 +34,10 @@ button {
   transition: all 0.2s;
 }
 
+select {
+  padding: 0 10px;
+}
+
 .clear::after {
   content: '';
   display: block;
