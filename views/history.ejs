@@ -34,7 +34,7 @@
               <label for="search-name">상품명</label>
               <input type="text" id="search-name" />
             </div>
-            <button type="submit">
+            <button type="submit" class="search">
               <img src="/images/search.png" alt="search icon" />
             </button>
           </form>
@@ -44,6 +44,7 @@
           <button class="save save-btn" type="submit"><img src="/images/save.png" alt="save" /></button>
           <button class="plus plus-btn"><img src="/images/plus.png" alt="plus" /></button>
           <button class="delete delet-btn"><img src="/images/delete.png" alt="delete" /></button>
+          <button class="edit delet-btn"><img src="/images/edit.png" alt="edit" /></button>
           <button onclick="location.href='http://localhost:3000/main'">Dashboard</button>
         </div>
       </div>
@@ -92,7 +93,6 @@
       document.querySelector('button.save').addEventListener('click', (e) => {
         const form = document.querySelector('form[name=heeForm]');
         const code = form.code.value;
-        // const name = form.name.value;
         const exDate = form.ex_date.value;
         const oi = form.oi.value;
         const count = form.count.value;
@@ -101,10 +101,6 @@
           alert('code');
           form.code.focus();
           return;
-          // } else if (!name) {
-          //   alert('name');
-          //   form.name.focus();
-          //   return;
         } else if (!exDate) {
           alert('ex_date');
           form.ex_date.focus();
@@ -116,6 +112,66 @@
         }
 
         form.submit();
+      });
+
+      function getStockInfo(historyId) {
+        let data;
+
+        $.ajax({
+          url: '/getstock',
+          method: 'post',
+          async: false,
+          data: {
+            history_id: historyId,
+          },
+          success: function (result) {
+            console.log(result);
+            data = result;
+          },
+        });
+
+        return data;
+      }
+
+      // 수정
+      document.querySelector('.edit').addEventListener('click', (e) => {
+        if (document.querySelectorAll('.select').length > 0) {
+          // let sidx = $('.list-wrap table tr').hasClass('select').att('data-history-id');
+          let element = Array.from(document.querySelectorAll('.list-wrap table tr')).find((e) =>
+            e.classList.contains('select')
+          );
+
+          $('.list-wrap table tr').removeClass('select');
+
+          let historyId = element.dataset.historyId;
+
+          let data = getStockInfo(historyId);
+
+          const html = [];
+
+          html.push(`<td><input type="text" value="${data.goods_code}" ></td>`);
+          html.push(`<td><input type="text" value="${data.goods_name}" ></td>`);
+          html.push(`<td><input type="text" value="${data.deal_period}" ></td>`);
+          html.push(`<td><select value="${data.state}" >`);
+          html.push(`<option value="1">입고</option>`);
+          html.push(`<option value="0">출고</option>`);
+          html.push(`</td>`);
+          html.push(`<td><input type="text" value="${data.count}" ></td>`);
+          html.push(`<td>${data.reg_date}</td>`);
+          html.push(`<td>${data.upd_date || ''}</td>`);
+
+          // const td1 = document.createElement('td');
+          // td1.textContent = 'data not found';
+          // td1.setAttribute('colspan', '7');
+          // td1.style.textAlign = 'center';
+          // td1.style.width = '100%';
+          // td1.addEventListener('click', (e) => alert('ok!!'));
+
+          // element.innerHTML = '';
+          // element.append(td1);
+
+          element.innerHTML = html.join('');
+        }
       });
     </script>
   </body>

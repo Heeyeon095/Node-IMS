@@ -75,7 +75,8 @@
             login_ps: document.getElementById('login-ps').value,
           },
           success: function (result) {
-            if (result.trim() == 'T') {
+            console.log(result);
+            if (result != 'F') {
               location.href = '/main';
             } else {
               alert(document.getElementById('login-id').value + ' user not found');

@@ -1,3 +1,15 @@
+// search btn click
+const search = document.querySelector('.search');
+search.addEventListener('click', (e) => {
+  const searchCode = document.querySelector('#search-code');
+  const searchName = document.querySelector('#search-name');
+  if (searchCode.value == '' && searchName.value == '') {
+    alert('검색 값을 한가지 이상 입력해주세요!')
+  } else {
+    // 검색 실행하기
+  }
+});
+
 // list click
 let sel;
 
@@ -25,7 +37,7 @@ function clickPlus() {
 
   $('.list-wrap table tr').removeClass('select');
 
-  if (count.length > 4) return;
+  if (count.length > 0) return;
 
   _plus.push(`<tr class="new-tr">`);
   _plus.push(`  <td>&nbsp;</td>`);
@@ -78,12 +90,10 @@ document.querySelector('button.delete').addEventListener('click', (e) => {
 });
 
 document.querySelector('button.delete').addEventListener('click', (e) => {
-  const element = document.querySelectorAll('table.list-table tbody > tr.new-tr')[
-    document.querySelectorAll('table.list-table tbody > tr.new-tr').length - 1
-  ];
   if (document.querySelectorAll('.select').length > 0) {
     // let sidx = $('.list-wrap table tr').hasClass('select').att('data-history-id');
     let sidx = Array.from(document.querySelectorAll('.list-wrap table tr')).find((e) => e.classList.contains('select'));
-    alert(sidx.dataset.historyId);
+    location.href = "/deleteStock?history_id=" + sidx.dataset.historyId;
   }
 });
+
